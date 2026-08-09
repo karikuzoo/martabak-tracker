@@ -13,7 +13,6 @@ var (
 	MartabakTypes = []string{
 		"Martabak Telur",
 		"Martabak Coklat",
-		"Martabak Telur",
 		"Martabak Kacang",
 		"Martabak Pisang",
 		"Martabak Ketan Hitam",
