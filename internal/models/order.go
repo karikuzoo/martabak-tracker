@@ -11,7 +11,8 @@ var (
 	OrderStatuses = []string{"Order placed", "Preparing", "Baking", "Quality Check", "Ready"}
 
 	MartabakTypes = []string{
-		"Martabak Telur",
+		"Martabak Telur Bebek",
+		"Martabak Telur Ayam",
 		"Martabak Coklat",
 		"Martabak Kacang",
 		"Martabak Pisang",
@@ -20,7 +21,7 @@ var (
 	}
 
 	MartabakSizes = []string{
-		"Small", "Medium", "Large", "X-Large",
+		"Small", "Medium", "Large", "Super Large",
 	}
 )
 
