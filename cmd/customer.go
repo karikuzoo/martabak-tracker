@@ -9,7 +9,7 @@ import (
 )
 
 type CustomerData struct {
-	Ttitle   string
+	Title    string
 	Order    models.Order
 	Statuses []string
 }
@@ -44,9 +44,9 @@ func (h *Handler) HandleNewOrderPost(c *gin.Context) {
 	orderItems := make([]models.OrderItem, len(form.Sizes))
 	for i := range orderItems {
 		orderItems[i] = models.OrderItem{
-			Size:        form.Sizes[i],
-			Martabak:    form.MartabakTypes[i],
-			Instruction: form.Instructions[i],
+			Size:         form.Sizes[i],
+			Martabak:     form.MartabakTypes[i],
+			Instructions: form.Instructions[i],
 		}
 	}
 	order := models.Order{
@@ -77,7 +77,7 @@ func (h *Handler) serveCustomer(c *gin.Context) {
 		return
 	}
 	c.HTML(http.StatusOK, "customer.tmpl", CustomerData{
-		Ttitle:   "Martabak Enak - Order Details " + order.ID,
+		Title:    "Martabak Enak - Order Details " + order.ID,
 		Order:    *order,
 		Statuses: models.OrderStatuses,
 	})

@@ -40,11 +40,11 @@ type Order struct {
 }
 
 type OrderItem struct {
-	ID          string `gorm:"primaryKey;size:14" json:"id"`
-	OrderID     string `gorm:"index;size:14;not null" json:"orderId"`
-	Size        string `gorm:"not null" json:"size"`
-	Martabak    string `gorm:"not null" json:"martabak"`
-	Instruction string `json:"instruction"`
+	ID           string `gorm:"primaryKey;size:14" json:"id"`
+	OrderID      string `gorm:"index;size:14;not null" json:"orderId"`
+	Size         string `gorm:"not null" json:"size"`
+	Martabak     string `gorm:"not null" json:"martabak"`
+	Instructions string `json:"instructions"`
 }
 
 func (o *Order) BeforeCreate(tx *gorm.DB) error {
