@@ -18,16 +18,19 @@
                         <!-- Name field -->
                         <label class="block text-gray-700 text-sm font-medium mb-2" for="name">Nama(*)</label>
                         <input class="w-full p-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all" type="text" name="name" id="name" required minlength="3" maxlength="50" placeholder="Name">
+                        <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Nama Harus diisi!</p>
                     </div>
                     <div>
                         <!-- Phone field -->
                         <label class="block text-gray-700 text-sm font-medium mb-2" for="phone">Telepon(*)</label>
                         <input class="w-full p-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all" type="text" name="phone" id="phone" required inputmode="numeric" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g,'')" minlength="8" maxlength="15" placeholder="Phone">
+                        <p id="phone-error" class="text-red-500 text-sm mt-1 hidden">Telepon Harus diisi!</p>
                     </div>
                     <div>
                         <!-- Address field -->
                         <label class="block text-gray-700 text-sm font-medium mb-2" for="address">Alamat(*)</label>
                         <input class="w-full p-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all" type="text" name="address" id="address" required minlength="5" maxlength="200" placeholder="Address">
+                        <p id="address-error" class="text-red-500 text-sm mt-1 hidden">Alamat Harus diisi!</p>
                     </div>
                 </div>
 
@@ -81,8 +84,9 @@
         </div>
     </template>
 
-
+    
 <script>
+    // adding and removing martabak script
     let martabakCount = 0;
 
     function addMartabak() {
@@ -99,7 +103,53 @@
         martabakCount = document.querySelectorAll(".martabak-item").length;
     }
     addMartabak();
-</script>
 
+    // Form validation script
+    document.addEventListener('DOMContentLoaded', function () {
+        const form =document.getElementById('orderForm');
+        const fields = [
+            { id: 'name', errorId: 'name-error' },
+            { id: 'phone', errorId: 'phone-error' },
+            { id: 'address', errorId: 'address-error'}
+        ];
+
+        // 1. Validate fields on input
+        form.addEventListener('submit', function (event) {
+            let isValid = true;
+
+            fields.forEach(field => {
+                const input = document.getElementById(field.id);
+                const errorText = document.getElementById(field.errorId);
+
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.classList.remove('border-gray-300');
+                    input.classList.add('border-red-500', 'ring-2', 'ring-red-500');
+                    errorText.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
+                    input.classList.add('border-gray-300');
+                    errorText.classList.add('hidden');
+                }
+            });
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        fields.forEach(field => {
+            const input = document.getElementById(field.id);
+            const errorText = document.getElementById(field.errorId);
+
+            input.addEventListener('input', function (){
+                if (this.value.trim()){
+                    this.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
+                    this.classList.add('border-gray-300');
+                    errorText.classList.add('hidden');
+                }
+            });
+        });
+    });
+</script>
 
 {{template "bottom" .}}
