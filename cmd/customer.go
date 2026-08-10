@@ -14,11 +14,11 @@ type OrderFormData struct {
 }
 
 type OrderRequest struct {
-	Name          string   `form:"name" binding:"required, min=3, max=50"`
-	Phone         string   `form:"phone" binding:"required, min=8, max=15"`
-	Address       string   `form:"address" binding:"required, min=5, max=200"`
-	Sizes         []string `form:"sizes" binding:"required min=1, dive, valid_martabak_size"`
-	MartabakTypes []string `form:"martabak" binding:"required min=1, dive, valid_martabak_type"`
+	Name          string   `form:"name" binding:"required,min=3,max=50"`
+	Phone         string   `form:"phone" binding:"required,numeric,min=8,max=15"`
+	Address       string   `form:"address" binding:"required,min=5,max=200"`
+	Sizes         []string `form:"sizes" binding:"required,min=1,dive,valid_martabak_size"`
+	MartabakTypes []string `form:"martabak" binding:"required,min=1,dive,valid_martabak_type"`
 	Instructions  []string `form:"instructions" binding:"max=200"`
 }
 

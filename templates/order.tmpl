@@ -5,24 +5,33 @@
     <div class="flex items-center justify-center p-6 md:p-8">
         <div class="bg-white/80 backdrop-blur-sm p-8 md:p-10 rounded-3xl shadow-xl border border-white/20 max-w-2xl w-full">
             <h1 class="text-4xl font-bold text-gray-900 mb-8 text-center tracking-tight">Orderan Baru Martabak</h1>
+            
+            <!-- Form for customer order -->
             <form action="/new-order" method="POST" class="space-y-6">
                 <div class="space-y-5">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4">
                         Customer Information
                     </h2>
+
+                    <!-- Customer information fields -->
                     <div>
-                        <label class="block text-gray-700 text-sm font-medium mb-2" for="name">Nama</label>
-                        <input class="w-full p-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all" type="text" name="name" id="name" required minlength="3" maxlength="50">
+                        <!-- Name field -->
+                        <label class="block text-gray-700 text-sm font-medium mb-2" for="name">Nama(*)</label>
+                        <input class="w-full p-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all" type="text" name="name" id="name" required minlength="3" maxlength="50" placeholder="Name">
                     </div>
                     <div>
-                        <label class="block text-gray-700 text-sm font-medium mb-2" for="phone">Telepon</label>
-                        <input class="w-full p-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all" type="text" name="phone" id="phone" required minlength="8" maxlength="15">
+                        <!-- Phone field -->
+                        <label class="block text-gray-700 text-sm font-medium mb-2" for="phone">Telepon(*)</label>
+                        <input class="w-full p-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all" type="text" name="phone" id="phone" required inputmode="numeric" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g,'')" minlength="8" maxlength="15" placeholder="Phone">
                     </div>
                     <div>
-                        <label class="block text-gray-700 text-sm font-medium mb-2" for="address">Alamat</label>
-                        <input class="w-full p-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all" type="text" name="address" id="address" required minlength="5" maxlength="200">
+                        <!-- Address field -->
+                        <label class="block text-gray-700 text-sm font-medium mb-2" for="address">Alamat(*)</label>
+                        <input class="w-full p-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all" type="text" name="address" id="address" required minlength="5" maxlength="200" placeholder="Address">
                     </div>
                 </div>
+
+                <!-- Martabak order section -->
                 <div class="space-y-5">
                     <div class="flex justify-between item-center">
                         <h2 class="text-xl font-semibold text-gray-800">Pesanan Martabak</h2>
@@ -42,7 +51,7 @@
     <template id="martabakTemplate">
         <div class="martabak-item border border-gray-200 rounded-2xl p-5 bg-gray-50/50">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-gray-800">Martabak<span class="martabak-number"></span></h3>
+                <h3 class="text-lg font-semibold text-gray-800">Martabak <span class="martabak-number"></span></h3>
                 <button type="button" onClick="removeMartabak(this)" class="text-red-500 hover:text-red-700 font-medium text-sm transition-colors">
                     Remove
                 </button>
@@ -50,7 +59,7 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-gray-700 text-sm font-medium md-2">Size Martabak</label>
-                    <select name="size" required class="w-full p-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all bg-white">
+                    <select name="sizes" required class="w-full p-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all bg-white">
                         {{range $.MartabakSizes}}
                         <option value="{{.}}">{{.}}</option>
                         {{end}}
@@ -66,7 +75,7 @@
                 </div>
                 <div>
                     <label class="block text-gray-700 text-sm font-medium md-2">Catatan tambahan</label>
-                    <textarea maxlength="200" name="instructions" rows="2" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 focus-border-transparent transition-all resize-none"></textarea>
+                    <textarea maxlength="200" name="instructions" rows="2" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400 focus-border-transparent transition-all resize-none" placeholder="Additional Notes"></textarea>
                 </div>
             </div>
         </div>
