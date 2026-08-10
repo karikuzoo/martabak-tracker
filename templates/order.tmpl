@@ -7,7 +7,7 @@
             <h1 class="text-4xl font-bold text-gray-900 mb-8 text-center tracking-tight">Orderan Baru Martabak</h1>
             
             <!-- Form for customer order -->
-            <form action="/new-order" method="POST" class="space-y-6">
+            <form id="orderForm" action="/new-order" method="POST" class="space-y-6">
                 <div class="space-y-5">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4">
                         Customer Information
@@ -44,9 +44,9 @@
                     </div>
                     <div id="martabak" class="space-y-4"></div>
                 </div>
-                <button type="submit" class="w-full bg-emerald-500 text-white font-semibold py-3 px-3 rounded-xl hover:bg-emerald-600 active:scale-[0.99] transition-all shadow-lg shadow-emerald-500/30">
+            <button type="submit" class="w-full bg-emerald-500 text-white font-semibold py-3 px-3 rounded-xl hover:bg-emerald-600 active:scale-[0.99] transition-all shadow-lg shadow-emerald-500/30">
                     Submit Order
-                </button>
+            </button>
             </form>
         </div>
     </div>
@@ -86,7 +86,7 @@
 
     
 <script>
-    // adding and removing martabak script
+// adding and removing martabak script
     let martabakCount = 0;
 
     function addMartabak() {
@@ -96,7 +96,6 @@
     }
     function removeMartabak(btn) {
         btn.closest(".martabak-item").remove();
-        
         document.querySelectorAll(".martabak-number").forEach((item, index) => {
             item.querySelector(".martabak-number").textContent = index + 1;
         })
@@ -104,9 +103,9 @@
     }
     addMartabak();
 
-    // Form validation script
+// Form validation script
     document.addEventListener('DOMContentLoaded', function () {
-        const form =document.getElementById('orderForm');
+        const form = document.getElementById('orderForm');
         const fields = [
             { id: 'name', errorId: 'name-error' },
             { id: 'phone', errorId: 'phone-error' },

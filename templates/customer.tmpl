@@ -1,11 +1,24 @@
 {{template "top" .}}
-<title>Order Status</title>
+<title>{{.Title}}</title>
+<style>
+    @keyframes spin-slow {
+        to {transform: rotate(360deg);}
+    }
+    .animate-spin-slow {
+        animation: spin-slow 5s linear infinite;
+    }
+</style>
 </head>
-<body>
-    <div class="mx-w-md mx-auto text-center">
-        <h1 class="text-2xl font-bold mb-4">
-            Order Placed Successfully!
+<body class="bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 min-h-screen">
+    <div class="flex flex-col item-center p-6 md:p-8">
+        <img src="/static/images/martabak.svg" alt="Martabak Loading" class="w-48 h-48 mb-10 animate-spin-slow drop-shadow-lg">
+        <div id="statusContainer" class="bg-white/80 backdrop-blur-sm p-8 md:p-10 roundex-3xl shadow-2xl border-white/20 max-w-3xl w-full"></div>
+        <h1 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900 text-center tracking-thigth">
+            Track Your Martabak Order
         </h1>
+        <div class="text-lg text-gray-500 mb-10 text-center font-medium">
+            Order #{{.Order.ID}}
+        </div>
         <p class="text-lg mb-2">Order ID:</p>
         <p class="text-xl font-bold mb-4">
             {{.Order.ID}}

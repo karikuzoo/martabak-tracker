@@ -8,6 +8,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type CustomerData struct {
+	Ttitle   string
+	Order    models.Order
+	Statuses []string
+}
+
 type OrderFormData struct {
 	MartabakTypes []string
 	MartabakSizes []string
@@ -70,7 +76,9 @@ func (h *Handler) serveCustomer(c *gin.Context) {
 		c.String(http.StatusNotFound, "Order not found")
 		return
 	}
-	c.HTML(http.StatusOK, "customer.tmpl", gin.H{
-		"Order": order,
+	c.HTML(http.StatusOK, "customer.tmpl", CustomerData{
+		Ttitle:   "Martabak Enak - Order Details " + order.ID,
+		Order:    *order,
+		Statuses: models.OrderStatuses,
 	})
 }
