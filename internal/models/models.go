@@ -10,6 +10,7 @@ import (
 type DBModel struct {
 	Order OrderModel
 	User  UserModel
+	DB    *gorm.DB
 }
 
 func InitDB(dataSourceName string) (*DBModel, error) {
@@ -25,6 +26,7 @@ func InitDB(dataSourceName string) (*DBModel, error) {
 	}
 
 	dbModel := &DBModel{
+		DB:    db,
 		Order: OrderModel{DB: db},
 		User:  UserModel{DB: db},
 	}
