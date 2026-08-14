@@ -20,7 +20,7 @@
                 Order {{.Order.ID}}
             </div>
             <div class="relative flex justify-between items-center mb-4">
-                <div id="progressLine" class="absolute inset-x-[30px] h-1.5 bg-gray-200 top-1/2 -transtale-y-1/2 rounded-full"></div>
+                <div id="progressLine" class="absolute inset-x-[30px] h-1.5 bg-gray-200 top-1/2 -translate-y-1/2 rounded-full"></div>
                 {{range $index, $status := .Statuses}}
                 <div class="flex-1 flex justify-center relative mx-2">
                     <div id="step{{add $index 1}}" class="size-14 bg-gray-300 rounded-full flex items-center justify-center text-white font-bold transition-all duration-300 z-10 shadow-md">
@@ -81,6 +81,7 @@
     </div>
     <script>
         const statuses = {{json .Statuses}};
+        const orderId = "{{.Order.ID}}"
 
         function updateStatusBar(currentStatus) {
             const currentIndex = statuses.indexOf(currentStatus)
@@ -97,5 +98,9 @@
             progressLine.style.background = `linear-gradient(to right, #9f0713 ${progressPercentage}%, #e5e7eb ${progressPercentage}%)`
         }
         updateStatusBar("{{.Order.Status}}")
+
+        const eventSrc = new EventSource(`/notifications?orderId=${orderId}`);
+        eventSrc.onmessage = () => location.reload();
+        eventSrc.onerror = err => console.error("EventSource failed:", err);
     </script>
 {{template "bottom" .}}
