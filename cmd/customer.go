@@ -84,3 +84,26 @@ func (h *Handler) serveCustomer(c *gin.Context) {
 		Statuses: models.OrderStatuses,
 	})
 }
+
+func (h *Handler) HandleOrderDone(c *gin.Context) {
+	orderID := c.Param("id")
+
+	order, err := h.orders.GetOrder(orderID)
+	if err != nil {
+		c.String(http.StatusNotFound, "Order not found")
+		return
+	}
+
+	lastStatus := models.OrderStatuses[len(models.OrderStatuses)-1]
+	if order.Status != lastStatus {
+		c.String(http.StatusBadRequest, "Pesanan belum selesai")
+		return
+	}
+
+	if err := h.orders.DeleteOrder(orderID); err != nil {
+		c.String(http.StatusInternalServerError, "Gagal menyelesaikan pesanan")
+		return
+	}
+
+	c.Redirect(http.StatusSeeOther, "/")
+}

@@ -113,68 +113,50 @@
             { id: 'address', errorId: 'address-error'}
         ];
 
-        // 1. Validate fields on input
+        function validateField(field) {
+            const input = document.getElementById(field.id);
+            const errorText = document.getElementById(field.errorId);
+            const phoneLengthError = field.id === 'phone' ? document.getElementById('phone-length-error') : null;
+            const value = input.value.trim();
+            let valid = true;
+
+            if (!value) {
+                valid = false;
+                input.classList.remove('border-gray-300');
+                input.classList.add('border-red-500', 'ring-2', 'ring-red-500');
+                errorText.classList.remove('hidden');
+                if (phoneLengthError) phoneLengthError.classList.add('hidden');
+            } else if (field.id === 'phone' && value.length < 8) {
+                valid = false;
+                input.classList.remove('border-gray-300');
+                input.classList.add('border-red-500', 'ring-2', 'ring-red-500');
+                errorText.classList.add('hidden');
+                phoneLengthError.classList.remove('hidden');
+            } else {
+                input.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
+                input.classList.add('border-gray-300');
+                errorText.classList.add('hidden');
+                if (phoneLengthError) phoneLengthError.classList.add('hidden');
+            }
+            return valid;
+        }
+
+        // 1. Validate fields on submit
         form.addEventListener('submit', function (event) {
             let isValid = true;
-
             fields.forEach(field => {
-                const input = document.getElementById(field.id);
-                const errorText = document.getElementById(field.errorId);
-                const phoneLengthError = document.getElementById('phone-length-error');
-
-                if (!input.value.trim()) {
-                    isValid = false;
-                    input.classList.remove('border-gray-300');
-                    input.classList.add('border-red-500', 'ring-2', 'ring-red-500');
-                    errorText.classList.remove('hidden');
-                    if (field.id === 'phone') phoneLengthError.classList.add('hidden');
-                } else if (field.id === 'phone' && input.value.trim().length < 8) {
-                    isValid = false;
-                    input.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
-                    input.classList.add('border-gray-300');
-                    errorText.classList.add('hidden');
-                    phoneLengthError.classList.remove('hidden');
-                } else {
-                    input.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
-                    input.classList.add('border-gray-300');
-                    errorText.classList.add('hidden');
-                    if (field.id === 'phone') phoneLengthError.classList.add('hidden');
-                }
+                if (!validateField(field)) isValid = false;
             });
             if (!isValid) {
                 event.preventDefault();
             }
         });
 
+        // 2. Validate fields live while typing
         fields.forEach(field => {
             const input = document.getElementById(field.id);
-            const errorText = document.getElementById(field.errorId);
-            const phoneLengthError = field.id === 'phone' ? document.getElementById('phone-length-error') : null;
-
-            input.addEventListener('input', function (){
-                const value = this.value.trim();
-                if (field.id === 'phone') {
-                    if (!value) {
-                        this.classList.add('border-red-500', 'ring-2', 'ring-red-500');
-                        this.classList.remove('border-gray-300');
-                        errorText.classList.remove('hidden');
-                        phoneLengthError.classList.add('hidden');
-                    } else if (value.length < 8) {
-                        this.classList.add('border-red-500', 'ring-2', 'ring-red-500');
-                        this.classList.remove('border-gray-300');
-                        errorText.classList.add('hidden');
-                        phoneLengthError.classList.remove('hidden');
-                    } else {
-                        this.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
-                        this.classList.add('border-gray-300');
-                        errorText.classList.add('hidden');
-                        phoneLengthError.classList.add('hidden');
-                    }
-                } else if (value){
-                    this.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
-                    this.classList.add('border-gray-300');
-                    errorText.classList.add('hidden');
-                }
+            input.addEventListener('input', function () {
+                validateField(field);
             });
         });
     });
