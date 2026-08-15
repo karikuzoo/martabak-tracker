@@ -110,6 +110,11 @@ Environment variable yang perlu di-set di dashboard Vercel:
 | `SESSION_SECRET_KEY` | String random untuk enkripsi session (jangan pakai default) |
 | `GIN_MODE` | `release` untuk production |
 
-## 📄 Lisensi
+## Login Access
+for User
+https://martabak-tracker.vercel.app/
 
-Belum ditentukan.
+for Admin
+https://martabak-tracker.vercel.app/admin
+Username : admin
+Password : password1234
