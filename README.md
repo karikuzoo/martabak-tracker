@@ -1,4 +1,4 @@
-# 🥞 Martabak Tracker
+# Martabak Tracker
 
 Aplikasi web untuk mengelola dan melacak pesanan martabak secara real-time — dibangun dengan Go, Gin, dan GORM. Customer bisa memesan, melacak status pesanan secara live tanpa refresh manual, dan admin bisa mengelola semua pesanan dari satu dashboard.
 
