@@ -3,7 +3,7 @@ package models
 import (
 	"fmt"
 
-	"github.com/glebarez/sqlite"
+	libsql "github.com/ekristen/gorm-libsql"
 	"gorm.io/gorm"
 )
 
@@ -14,7 +14,7 @@ type DBModel struct {
 }
 
 func InitDB(dataSourceName string) (*DBModel, error) {
-	db, err := gorm.Open(sqlite.Open(dataSourceName), &gorm.Config{})
+	db, err := gorm.Open(libsql.Open(dataSourceName), &gorm.Config{})
 
 	if err != nil {
 		return nil, fmt.Errorf("failed to migrate database: %v", err)

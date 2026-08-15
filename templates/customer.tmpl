@@ -80,7 +80,7 @@
             <form action="/customer/{{.Order.ID}}/done" method="POST">
                 <button type="submit"
                     {{if ne .Order.Status (index .Statuses (add (len .Statuses) -1))}}disabled{{end}}
-                    class="w-full font-semiboold py-3 px-3 rounded-xl trasition-all
+                    class="w-full font-semiboold py-3 px-3 rounded-xl transition-all
                     {{if eq .Order.Status (index .Statuses (add (len .Statuses) -1))}}
                     bg-emerald-500 text-white hover:bg-emerald-600 active:scale-[0.99] shadow-lg shadow-emerald-500/30 cursor-pointer
                     {{else}}
