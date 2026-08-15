@@ -1,0 +1,24 @@
+{{template "top" .}}
+<title>Pesanan Tidak Ditemukan</title>
+</head>
+<body class="bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 min-h-screen">
+    <div class="min-h-screen flex items-center justify-center p-6 md:p-8">
+        <div class="bg-white/80 backdrop-blur-sm p-8 md:p-10 rounded-3xl shadow-2xl border border-white/20 max-w-lg w-full text-center">
+            <div class="mx-auto mb-6 flex items-center justify-center size-24 rounded-full bg-red-50">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-12 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3 tracking-tight">
+                Pesanan Tidak Ditemukan
+            </h1>
+            <p class="text-gray-500 mb-8 leading-relaxed">
+                Silahkan kembali untuk membuat pesanan
+            </p>
+            <a href="/" class="inline-block w-full font-semibold py-3 px-3 rounded-xl transition-all bg-emerald-500 text-white hover:bg-emerald-600 active:scale-[0.99] shadow-lg shadow-emerald-500/30">
+                Kembali ke halaman Order
+            </a>
+        </div>
+    </div>
+    {{template "bottom" .}}
+    

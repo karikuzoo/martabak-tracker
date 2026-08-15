@@ -75,7 +75,7 @@ func (h *Handler) serveCustomer(c *gin.Context) {
 	}
 	order, err := h.orders.GetOrder(orderID)
 	if err != nil {
-		c.String(http.StatusNotFound, "Order not found")
+		c.HTML(http.StatusNotFound, "not-found.tmpl", nil)
 		return
 	}
 	c.HTML(http.StatusOK, "customer.tmpl", CustomerData{
@@ -90,7 +90,7 @@ func (h *Handler) HandleOrderDone(c *gin.Context) {
 
 	order, err := h.orders.GetOrder(orderID)
 	if err != nil {
-		c.String(http.StatusNotFound, "Order not found")
+		c.HTML(http.StatusNotFound, "not-found.tmpl", nil)
 		return
 	}
 
