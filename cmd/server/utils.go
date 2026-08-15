@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"html/template"
+	"martabak-tracker-go/templates"
 	"os"
 
 	"github.com/gin-contrib/sessions"
@@ -40,7 +41,7 @@ func loadTemplates(router *gin.Engine) error {
 			return template.JS(b)
 		},
 	}
-	tmpl, err := template.New("").Funcs(functions).ParseGlob("templates/*.tmpl")
+	tmpl, err := template.New("").Funcs(functions).ParseFS(templates.FS, "*.tmpl")
 	if err != nil {
 		return err
 	}
