@@ -5,6 +5,8 @@ import (
 	"martabak-tracker-go/internal/models"
 	"os"
 
+	_ "github.com/joho/godotenv/autoload"
+
 	"github.com/gin-gonic/gin"
 )
 

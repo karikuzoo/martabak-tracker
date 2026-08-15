@@ -2,7 +2,7 @@ package main
 
 import (
 	"io/fs"
-	templates "martabak-tracker-go/templates/static/images"
+	templates "martabak-tracker-go/templates"
 	"net/http"
 
 	"github.com/gin-contrib/sessions"
