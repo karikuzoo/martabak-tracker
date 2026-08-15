@@ -1,6 +1,10 @@
 package main
 
 import (
+	"io/fs"
+	templates "martabak-tracker-go/templates/static/images"
+	"net/http"
+
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
@@ -26,5 +30,9 @@ func setupRoutes(router *gin.Engine, h *Handler, store sessions.Store) {
 		admin.GET("/notifications", h.adminNotificationHandler)
 	}
 
-	router.Static("/static", "./templates/static")
+	staticFS, err := fs.Sub(templates.StaticFS, "static")
+	if err != nil {
+		panic(err)
+	}
+	router.StaticFS("/static", http.FS(staticFS))
 }
