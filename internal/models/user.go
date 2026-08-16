@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"strings"
 
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
@@ -20,7 +21,7 @@ type UserModel struct {
 func (u *UserModel) AuthenticateUser(username, password string) (*User, error) {
 	var user User
 
-	if err := u.DB.Where("username = ?", username).First(&user).Error; err != nil {
+	if err := u.DB.Where("LOWER(username) = ?", strings.ToLower(username)).First(&user).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, errors.New("invalid credentials")
 		}
